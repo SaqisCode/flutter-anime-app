@@ -38,7 +38,12 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       body: Column(
         children: [
-          SearchBarWidget(onSearch: searchAnime),
+          SearchBarWidget(
+            onSearch: searchAnime,
+            style: const TextStyle(),
+            textStyle: const TextStyle(),
+            decoration: const InputDecoration(),
+          ),
           isLoading
               ? const Center(child: CircularProgressIndicator())
               : Expanded(

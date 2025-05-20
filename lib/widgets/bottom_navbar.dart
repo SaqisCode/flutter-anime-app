@@ -12,9 +12,9 @@ class BottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: selectedIndex,
-      selectedItemColor: Color.fromARGB(255, 12, 209, 77), // Warna item yang dipilih
+      selectedItemColor: Color.fromARGB(255, 20, 180, 73), // Warna item yang dipilih
       unselectedItemColor: Colors.grey, // Warna item yang tidak dipilih
-      backgroundColor: Colors.black, // Tambahkan baris ini
+      backgroundColor: Color.fromARGB(255, 29, 25, 32), // Tambahkan baris ini
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),

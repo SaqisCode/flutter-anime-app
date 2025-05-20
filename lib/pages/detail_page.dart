@@ -43,10 +43,9 @@ class DetailPage extends StatelessWidget {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      const Icon(Icons.star, color: Colors.amber),
+                      Text('${anime.score}', style: const TextStyle(color: Colors.white)), 
                       const SizedBox(width: 4),
-                      Text('${anime.score}'),
-                    ],
+                      const Icon(Icons.star, color: Colors.amber, size: 17),             ],
                   ),
                   const SizedBox(height: 16),
                   Wrap(

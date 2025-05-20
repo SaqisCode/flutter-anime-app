@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Anime App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Color.fromARGB(255, 13, 11, 14),
+        scaffoldBackgroundColor: Color.fromARGB(255, 29, 25, 32),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: const HomePage(),
