@@ -23,7 +23,8 @@ class ApiService {
   static Future<Anime> getAnimeDetails(int id) async {
     final response = await http.get(Uri.parse('$baseUrl/anime/$id'));
     if (response.statusCode == 200) {
-      return Anime.fromJson(json.decode(response.body)['data']);
+      final jsonData = json.decode(response.body);
+      return Anime.fromJson(jsonData['data']);
     } else {
       throw Exception('Failed to load anime details');
     }
@@ -40,6 +41,21 @@ class ApiService {
       return data.map((json) => Anime.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load anime');
+    }
+  }
+
+  static Future<List<Anime>> getRecommendedAnime(int animeId) async {
+    final response = await http.get(Uri.parse('$baseUrl/anime/$animeId/recommendations'));
+    
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body)['data'] as List;
+      return data
+          .map((json) => Anime.fromJson(json))
+          .where((anime) => anime.malId != 0) // Pastikan malId valid
+          .take(9)
+          .toList();
+    } else {
+      throw Exception('Failed to load recommendations');
     }
   }
 }
