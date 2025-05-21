@@ -63,7 +63,6 @@ class AnimeCard extends StatelessWidget {
                             color: Colors.white,
                           ),
                         ),
-                        const SizedBox(height: 4),
                         Text(
                           anime.genres.join(', '),
                           maxLines: 2,
@@ -76,24 +75,24 @@ class AnimeCard extends StatelessWidget {
                         const SizedBox(height: 8),
                         Row(
                           children: [
+                            const Icon(Icons.star, color: Color.fromARGB(255, 20, 180, 73), size: 20),
+                            const SizedBox(width: 4),
                             Text(
                               '${anime.score}',
                               style: const TextStyle(
                                 fontWeight: FontWeight.w500,
-                                fontSize: 14,
+                                fontSize: 12,
                                 color: Colors.white
                               ),
                             ),
-                            const SizedBox(width: 4),
-                            const Icon(Icons.star, color: Colors.amber, size: 15),
                             const SizedBox(width: 16),
-                            Icon(Icons.calendar_today, size: 15, color: Colors.white),
-                            const SizedBox(width: 4),
+                            Icon(Icons.calendar_today, size: 13, color: Colors.white),
+                            const SizedBox(width: 6),
                             Text(
                               anime.year.toString(),
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 14,
+                                fontSize: 12,
                               ),
                             ),
                           ],

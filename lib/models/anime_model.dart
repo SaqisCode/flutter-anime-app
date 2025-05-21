@@ -8,6 +8,10 @@ class Anime {
   final String season;
   final int year;
   final List<String> producers;
+  final String trailerUrl;
+  final String trailerImagesUrl;
+  final String episodes;
+  final String status;
 
   Anime({
     required this.malId,
@@ -18,7 +22,11 @@ class Anime {
     required this.genres,
     required this.season,
     required this.year,
-    required this.producers,
+    required this.producers, 
+    required this.trailerUrl,
+    required this.trailerImagesUrl,
+    required this.episodes,
+    required this.status,
   });
 
   factory Anime.fromJson(Map<String, dynamic> json) {
@@ -26,10 +34,14 @@ class Anime {
       malId: json['mal_id'],
       title: json['title'] ?? json['title_english'] ?? 'No title',
       imageUrl: json['images']['jpg']['large_image_url'] ?? '',
+      trailerUrl: json['trailer']['embed_url'] ?? 'tidak ada trailer',
+      trailerImagesUrl: json['trailer']['images']['large_image_url'] ?? 'tidak ada trailer',
       score: json['score']?.toDouble() ?? 0.0,
       synopsis: json['synopsis'] ?? 'No synopsis available',
       genres: (json['genres'] as List?)?.map((g) => g['name'].toString()).toList() ?? [],
       season: json['season']?.toString() ?? 'Unknown',
+      episodes: json['episodes']?.toString() ?? 'Unknown',
+      status: json['status']?.toString() ?? 'Unknown',
       year: json['year'] ?? 0,
       
       producers: (json['producers'] as List?)?.map((p) => p['name'].toString()).toList() ?? [],

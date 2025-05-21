@@ -15,6 +15,11 @@ class ApiService {
     return _parseAnimeResponse(response);
   }
 
+  static Future<List<Anime>> getUpComingAnime() async {
+    final response = await http.get(Uri.parse('$baseUrl/top/anime?filter=upcoming'));
+    return _parseAnimeResponse(response);
+  }
+
   static Future<Anime> getAnimeDetails(int id) async {
     final response = await http.get(Uri.parse('$baseUrl/anime/$id'));
     if (response.statusCode == 200) {

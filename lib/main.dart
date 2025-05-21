@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Anime App',
+      title: 'ANIDEA',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Color.fromARGB(255, 29, 25, 32),

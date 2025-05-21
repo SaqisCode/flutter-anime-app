@@ -94,6 +94,37 @@ class _HomePageState extends State<HomePage> {
                 title: '',
                 future: ApiService.getFavoriteAnime(),
               ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Up Coming Anime',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.white,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // Add navigation or action here
+                    },
+                    child: const Text(
+                      'See All',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 20, 180, 73),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              AnimeSlider(
+                title: '',
+                future: ApiService.getUpComingAnime(),
+              ),
             ],
           ),
         ),

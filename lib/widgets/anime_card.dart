@@ -15,12 +15,12 @@ class AnimeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.0),
+        borderRadius: BorderRadius.circular(14.0),
       ),
       child: InkWell(
         onTap: onTap,
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(16.0),
+          borderRadius: BorderRadius.circular(14.0),
           child: Image.network(
             anime.imageUrl,
             height: 150,

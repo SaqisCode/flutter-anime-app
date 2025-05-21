@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/anime_model.dart';
+import '../services/api_service.dart';
+import '../widgets/anime_slider.dart';
 
 class DetailPage extends StatelessWidget {
   final Anime anime;
@@ -12,11 +14,11 @@ class DetailPage extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            expandedHeight: 300,
+            expandedHeight: 280,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.network(
-                anime.imageUrl,
+                anime.trailerImagesUrl,
                 fit: BoxFit.cover,
                 errorBuilder: (_, __, ___) => const Icon(Icons.error),
               ),
@@ -43,59 +45,64 @@ class DetailPage extends StatelessWidget {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      Text('${anime.score}', style: const TextStyle(color: Colors.white)), 
+                      const Icon(Icons.star, color: Color.fromARGB(255, 20, 180, 73), size: 20),
                       const SizedBox(width: 4),
-                      const Icon(Icons.star, color: Colors.amber, size: 17),             ],
-                  ),
-                  const SizedBox(height: 16),
+                      Text('${anime.score}', style: TextStyle(color: Colors.grey[600], fontSize: 13)),
+                      Text('  |  ', style: TextStyle(color: Colors.grey[600], fontSize: 25)),                      Text(
+                        anime.year.toString(),
+                        style: TextStyle(color: Colors.grey[600], fontSize: 13),
+                      ),
+                      Text('  |  ', style: TextStyle(color: Colors.grey[600], fontSize: 25)),    
+                      Text(
+                        anime.season,
+                        style: TextStyle(color: Colors.grey[600], fontSize: 13.5),
+                      ),
+                      Text('  |  ', style: TextStyle(color: Colors.grey[600], fontSize: 25)),    
+                      Text(
+                        anime.status,
+                        style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                      ),
+                    ],
+                  ),                  
+                  const SizedBox(height: 8),
                   Wrap(
                     spacing: 8,
                     children:
-                        anime.genres
-                            .map((genre) => Chip(label: Text(genre)))
-                            .toList(),
-                  ),
+                      anime.genres
+                        .map((genre) => Chip(
+                          label: Text(
+                            genre,
+                            style: const TextStyle(color: Color.fromARGB(255, 20, 180, 73), fontSize: 12),
+                          ),
+                          backgroundColor: Color.fromARGB(255, 29, 25, 32),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            side: const BorderSide(color: Color.fromARGB(255, 20, 180, 73)),
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+                          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ))
+                        .toList(),
+                  ),                  
                   const SizedBox(height: 16),
-                  const Text(
-                    'Synopsis',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
                   Text(
                     anime.synopsis,
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.grey[600]),
                   ),
                   const SizedBox(height: 16),
                   Row(
                     children: [
-                      const Text(
-                        'Season: ',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
                       Text(
-                        anime.season,
-                        style: const TextStyle(color: Colors.white),
+                        anime.episodes,
+                        style: TextStyle(color: Colors.white, fontSize: 14),
                       ),
-                      const SizedBox(width: 16),
-                      const Text(
-                        'Year: ',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Text(
-                        anime.year.toString(),
-                        style: const TextStyle(color: Colors.white),
-                      ),
+                      Text(' episodes', style: TextStyle(color: Colors.white, fontSize: 15)),  
                     ],
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Producers: ${anime.producers.join(', ')}',
+                    style: TextStyle(color: Colors.grey[400]),
                   ),
                 ],
               ),
