@@ -58,4 +58,5 @@ class ApiService {
       throw Exception('Failed to load recommendations');
     }
   }
+  
 }

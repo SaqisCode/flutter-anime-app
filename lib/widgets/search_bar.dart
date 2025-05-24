@@ -1,11 +1,13 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 class SearchBarWidget extends StatefulWidget {
   final Function(String) onSearch;
-
-  const SearchBarWidget({super.key, required this.onSearch, required TextStyle style, required TextStyle textStyle, required InputDecoration decoration});
+  
+  const SearchBarWidget({
+    super.key, 
+    required this.onSearch,
+  });
 
   @override
   State<SearchBarWidget> createState() => _SearchBarWidgetState();
@@ -25,27 +27,60 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   void _onSearchChanged(String query) {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 500), () {
-      if (query.isNotEmpty) {
-        widget.onSearch(query);
-      }
+      widget.onSearch(query);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextField(
-        controller: _controller,
-        decoration: InputDecoration(
-          hintText: 'Search anime...',
-          fillColor: Color.fromARGB(255, 12, 209, 77),
-          prefixIcon: const Icon(Icons.search),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(100.0),
-          ),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
         ),
-        onChanged: _onSearchChanged,
+        child: TextField(
+          controller: _controller,
+          style: const TextStyle(color: Colors.white, fontSize: 16),
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: const Color.fromARGB(255, 29, 25, 32),
+            hintText: 'Search anime...',
+            hintStyle: TextStyle(color: Colors.grey[600]),
+            prefixIcon: Icon(Icons.search, color: Colors.grey[600],),
+            suffixIcon: _controller.text.isNotEmpty
+                ? IconButton(
+                    icon: Icon(Icons.close, color: Colors.grey[600]),
+                    onPressed: () {
+                      _controller.clear();
+                      widget.onSearch('');
+                      setState(() {});
+                    },
+                  )
+                : null,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30),
+              borderSide: BorderSide.none,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30),
+              borderSide: const BorderSide(
+                color: Color.fromARGB(255, 20, 180, 73),
+                width: 1,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30),
+              borderSide: const BorderSide(
+                color: Color.fromARGB(255, 20, 180, 73),
+                width: 1.5,
+              ),
+            ),
+            contentPadding: const EdgeInsets.symmetric(vertical: 0),
+          ),
+          onChanged: _onSearchChanged,
+          onSubmitted: widget.onSearch,
+        ),
       ),
     );
   }

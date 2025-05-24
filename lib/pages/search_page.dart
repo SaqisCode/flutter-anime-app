@@ -16,9 +16,22 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   List<Anime> searchResults = [];
   bool isLoading = false;
+  bool hasSearched = false; // Tambahkan variabel untuk menandai sudah melakukan pencarian
 
   void searchAnime(String query) async {
-    setState(() => isLoading = true);
+    if (query.isEmpty) {
+      setState(() {
+        searchResults = [];
+        hasSearched = false;
+      });
+      return;
+    }
+
+    setState(() {
+      isLoading = true;
+      hasSearched = true; // Setelah melakukan pencarian
+    });
+    
     try {
       final results = await ApiService.searchAnime(query);
       setState(() {
@@ -38,31 +51,46 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       body: Column(
         children: [
+          SizedBox(height: 8,),
           SearchBarWidget(
             onSearch: searchAnime,
-            style: const TextStyle(),
-            textStyle: const TextStyle(),
-            decoration: const InputDecoration(),
           ),
-          isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : Expanded(
-                  child: ListView.builder(
-                    itemCount: searchResults.length,
-                    itemBuilder: (context, index) {
-                      final anime = searchResults[index];
-                      return AnimeCard(
-                        anime: anime,
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailPage(anime: anime),
-                          ),
-                        ),
-                      );
-                    },
+isLoading
+    ? Expanded( // Gunakan Expanded untuk mengisi seluruh ruang vertikal
+        child: Center(
+          child: CircularProgressIndicator(
+            color: Color.fromARGB(255, 20, 180, 73),
+          ),
+        ),
+      )
+    : Expanded(
+        child: hasSearched && searchResults.isEmpty
+            ? Center(
+                child: Text(
+                  'Cari anime favorite anda',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
+              )
+            : ListView.builder(
+                itemCount: searchResults.length,
+                itemBuilder: (context, index) {
+                  final anime = searchResults[index];
+                  return AnimeCard(
+                    anime: anime,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailPage(anime: anime),
+                      ),
+                    ),
+                  );
+                },
+              ),
+      ),
         ],
       ),
       bottomNavigationBar: const BottomNavBar(selectedIndex: 1),

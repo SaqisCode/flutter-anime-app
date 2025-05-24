@@ -22,7 +22,7 @@ class Anime {
     required this.genres,
     required this.season,
     required this.year,
-    required this.producers, 
+    required this.producers,
     required this.trailerUrl,
     required this.trailerImagesUrl,
     required this.episodes,
@@ -30,14 +30,12 @@ class Anime {
   });
 
   factory Anime.fromJson(Map<String, dynamic> json) {
-    // Handle data rekomendasi
     if (json['entry'] != null) {
       final entry = json['entry'];
       return Anime(
         malId: entry['mal_id'] as int,
         title: (entry['title'] ?? 'No title') as String,
         imageUrl: (entry['images']?['jpg']?['large_image_url'] ?? '') as String,
-        // Data minimal lainnya untuk tampilan card
         score: 0.0,
         synopsis: '',
         genres: [],
@@ -51,7 +49,6 @@ class Anime {
       );
     }
     
-    // Handle data lengkap anime
     return Anime(
       malId: json['mal_id'] as int,
       title: (json['title'] ?? json['title_english'] ?? 'No title') as String,
@@ -67,5 +64,31 @@ class Anime {
       trailerUrl: (json['trailer']?['embed_url'] ?? 'tidak ada trailer') as String,
       trailerImagesUrl: (json['trailer']?['images']?['large_image_url'] ?? 'tidak ada trailer') as String,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'mal_id': malId,
+      'title': title,
+      'images': {
+        'jpg': {
+          'large_image_url': imageUrl,
+        },
+      },
+      'score': score,
+      'synopsis': synopsis,
+      'genres': genres.map((g) => {'name': g}).toList(),
+      'season': season,
+      'year': year,
+      'producers': producers.map((p) => {'name': p}).toList(),
+      'trailer': {
+        'embed_url': trailerUrl,
+        'images': {
+          'large_image_url': trailerImagesUrl,
+        },
+      },
+      'episodes': episodes,
+      'status': status,
+    };
   }
 }

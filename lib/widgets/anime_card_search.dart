@@ -29,7 +29,7 @@ class AnimeCard extends StatelessWidget {
             child: Row(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(12),
                   child: Image.network(
                     anime.imageUrl,
                     height: 150,
@@ -40,7 +40,7 @@ class AnimeCard extends StatelessWidget {
                       width: 110,
                       decoration: BoxDecoration(
                         color: Colors.grey[300],
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(12),
                       ),
                       child: const Icon(Icons.error, size: 30),
                     ),
@@ -75,7 +75,7 @@ class AnimeCard extends StatelessWidget {
                         const SizedBox(height: 8),
                         Row(
                           children: [
-                            const Icon(Icons.star, color: Color.fromARGB(255, 20, 180, 73), size: 20),
+                            const Icon(Icons.star_rate_rounded, color: Color.fromARGB(255, 20, 180, 73), size: 20),
                             const SizedBox(width: 4),
                             Text(
                               '${anime.score}',
@@ -122,7 +122,7 @@ class AnimeCard extends StatelessWidget {
                             color: Colors.transparent,
                             child: InkWell(
                               onTap: onTap,
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(12),
                               child: const Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                                 child: Row(
