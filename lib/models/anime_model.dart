@@ -61,7 +61,7 @@ class Anime {
       status: (json['status']?.toString() ?? 'Unknown'),
       year: (json['year'] as int?) ?? 0,
       producers: (json['producers'] as List?)?.map((p) => p['name'].toString()).toList() ?? [],
-      trailerUrl: (json['trailer']?['embed_url'] ?? 'tidak ada trailer') as String,
+      trailerUrl: (json['trailer']?['url'] ?? 'tidak ada trailer') as String,
       trailerImagesUrl: (json['trailer']?['images']?['large_image_url'] ?? 'tidak ada trailer') as String,
     );
   }
@@ -82,7 +82,7 @@ class Anime {
       'year': year,
       'producers': producers.map((p) => {'name': p}).toList(),
       'trailer': {
-        'embed_url': trailerUrl,
+        'url': trailerUrl,
         'images': {
           'large_image_url': trailerImagesUrl,
         },

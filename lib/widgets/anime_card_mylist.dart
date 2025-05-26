@@ -113,15 +113,21 @@ class AnimeCard extends StatelessWidget {
 Consumer<MyListProvider>(
   builder: (context, provider, child) {
     final currentStatus = provider.getWatchStatus(anime.malId);
+    final isWatched = currentStatus == 'Already watched';
+    
     return SizedBox(
       height: 24,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 29, 25, 32),
+          color: isWatched 
+              ? const Color.fromARGB(255, 20, 180, 73).withOpacity(0.5) // Hijau transparan untuk sudah ditonton
+              : const Color.fromARGB(255, 255, 80, 80).withOpacity(0.5), // Merah transparan untuk belum ditonton
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: const Color.fromARGB(255, 20, 180, 73),
+            color: isWatched 
+                ? const Color.fromARGB(255, 20, 180, 73) // Hijau untuk sudah ditonton
+                : const Color.fromARGB(255, 255, 80, 80), // Merah untuk belum ditonton
             width: 0.5,
           ),
         ),
@@ -130,14 +136,14 @@ Consumer<MyListProvider>(
             value: currentStatus,
             isDense: true,
             dropdownColor: const Color.fromARGB(255, 29, 25, 32),
-            borderRadius: BorderRadius.circular(12), // Match container border
+            borderRadius: BorderRadius.circular(12),
             icon: const Icon(Icons.arrow_drop_down, 
               size: 16,
               color: Colors.white
             ),
             iconSize: 16,
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: isWatched ? Colors.white : Colors.white,
               fontSize: 10,
             ),
             items: [
@@ -146,9 +152,9 @@ Consumer<MyListProvider>(
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.access_time, // Clock icon for "will watch"
+                    Icon(Icons.access_time,
                       size: 10,
-                      color: Colors.amber,
+                      color: Colors.white,
                     ),
                     const SizedBox(width: 6),
                     Text(
@@ -166,16 +172,16 @@ Consumer<MyListProvider>(
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.check_circle, // Checkmark icon for "watched"
+                    Icon(Icons.check_circle,
                       size: 10,
-                      color: Colors.green,
+                      color: Colors.white,
                     ),
                     const SizedBox(width: 6),
                     Text(
                       'Already watched',
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.white
+                        color: Colors.white,
                       ),
                     ),
                   ],

@@ -6,6 +6,7 @@ plugins {
 }
 
 android {
+    namespace 'com.pichillilorenzo.flutter_inappwebview'
     namespace = "com.example.flutter_anime_tes"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion

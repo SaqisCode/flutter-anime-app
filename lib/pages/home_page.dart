@@ -63,19 +63,6 @@ class _HomePageState extends State<HomePage> {
                           color: Colors.white,
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {
-                          // Navigation to popular anime page
-                        },
-                        child: const Text(
-                          'See All',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 20, 180, 73),
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                   const SizedBox(height: 1),
@@ -103,19 +90,6 @@ class _HomePageState extends State<HomePage> {
                           color: Colors.white,
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {
-                          // Navigation to favorite anime page
-                        },
-                        child: const Text(
-                          'See All',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 20, 180, 73),
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                   const SizedBox(height: 1),
@@ -141,19 +115,6 @@ class _HomePageState extends State<HomePage> {
                           fontSize: 20,
                           fontWeight: FontWeight.w900,
                           color: Colors.white,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          // Navigation to upcoming anime page
-                        },
-                        child: const Text(
-                          'See All',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 20, 180, 73),
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
                         ),
                       ),
                     ],
